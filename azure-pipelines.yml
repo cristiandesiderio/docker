@@ -39,7 +39,7 @@ stages:
     - task: aquasec.aquasec.showCommits.aquasecScanner@4
       displayName: 'Image Scanning'
       inputs:
-        image: 'acr11801.azurecr.io/fabric-$(image):$(tag)'
+        image: 'cristiandesiderio/docker:$(tag)'
         scanner: 'acncio.azurecr.io/aqua-scanner:4.2.19364'
         registry: acr11801
         connection: 'Aqua Console – PreDev'
