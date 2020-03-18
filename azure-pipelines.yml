@@ -31,7 +31,7 @@ stages:
       inputs:
         containerRegistry: '11801 ACR'
         command: login
-     - task: Docker@2
+    - task: Docker@2
       displayName: 'Login acncio'
       inputs:
         containerRegistry: acncio
