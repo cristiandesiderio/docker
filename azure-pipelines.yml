@@ -26,7 +26,7 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: $(tag)
-        imageName: 'jenkins:$(tag)'
+        imageName: ':$(tag)'
     - task: Docker@2
       displayName: 'Login ACN11801'
       inputs:
@@ -37,10 +37,17 @@ stages:
       inputs:
         containerRegistry: acncio
         command: login
-    - task: aquasec.aquasec.showCommits.aquasecScanner@4
+    - task: aquasecScanner@4
       displayName: 'Image Scanning'
       inputs:
-        image: 'cristiandesiderio/docker:$(tag)'
+        image: 'jenkins:$(tag)'
+        scanType: 'local'
+        register: false
+        hideBase: false
+        showNegligible: false
+        windowsScannerVersion: '4.2.0'
         scanner: 'acncio.azurecr.io/aqua-scanner:4.2.19364'
-        registry: acr11801
+        registry: 'cristiandesiderio'
         connection: 'Aqua Console – PreDev'
+    
+
