@@ -26,6 +26,7 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: $(tag)
+        imageName: 'jenkins:$(tag)'
     - task: Docker@2
       displayName: 'Login ACN11801'
       inputs:
