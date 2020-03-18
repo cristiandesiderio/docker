@@ -27,3 +27,20 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+    - task: Docker@2
+      displayName: 'Login ACN11801'
+      inputs:
+        containerRegistry: '11801 ACR'
+        command: login
+     - task: Docker@2
+      displayName: 'Login acncio'
+      inputs:
+        containerRegistry: acncio
+        command: login
+    - task: aquasec.aquasec.showCommits.aquasecScanner@4
+      displayName: 'Image Scanning'
+      inputs:
+        image: 'acr11801.azurecr.io/fabric-$(image):$(tag)'
+        scanner: 'acncio.azurecr.io/aqua-scanner:4.2.19364'
+        registry: acr11801
+        connection: 'Aqua Console – PreDev'
