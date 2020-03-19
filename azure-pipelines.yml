@@ -41,14 +41,14 @@ stages:
     - task: aquasecScanner@4
       displayName: 'Image Scanning'
       inputs:
-        image: 'jenkins:$(tag)'
+        image: 'acr11801.azurecr.io/jenkins:$(tag)'
         scanType: 'local'
         register: false
         hideBase: false
         showNegligible: false
         windowsScannerVersion: '4.2.0'
         scanner: 'acncio.azurecr.io/aqua-scanner:4.2.19364'
-        registry: 'cristiandesiderio'
+        registry: 'acr11801'
         connection: 'Aqua Console – PreDev'
     
 
